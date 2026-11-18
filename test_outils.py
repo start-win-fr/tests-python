@@ -14,22 +14,25 @@ def test_est_pair():
     assert est_pair(8)
 
 
+# T3 : parametrize avec tuples (entrée, résultat attendu).
+# Chaque cas = un test à part (pytest en affichera autant que de tuples).
 @pytest.mark.parametrize("nombre, resultat", [
-    (0, False),
-    (1, False),
-    (2, True),
-    (3, True),
-    (4, False),
-    (25, False),
-    (49, False),
-    (97, True),
-    (7919, True),
-    (-7, False),
-    (2.5, False),
-    (7.3, False),
-    (5.0, True)
+    (0, False),      # < 2 → pas premier
+    (1, False),      # < 2 → pas premier
+    (2, True),       # plus petit nombre premier
+    (3, True),       # premier
+    (4, False),      # 2×2
+    (25, False),     # 5×5 : carré d'un premier
+    (49, False),     # 7×7 : carré d'un premier
+    (97, True),      # grand premier
+    (7919, True),    # encore plus grand
+    (-7, False),     # négatif → pas premier
+    (2.5, False),    # décimal non entier → False
+    (7.3, False),    # décimal non entier → False
+    (5.0, True),     # flottant mais valeur entière d'un premier
 ])
 def test_est_premier(nombre, resultat):
+    # On compare le booléen renvoyé à la valeur attendue du tuple
     assert est_premier(nombre) == resultat
 
 
